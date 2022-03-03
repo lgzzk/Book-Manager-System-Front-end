@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # book-manager-system-front-end
 
 ## Project setup
@@ -22,3 +23,6 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+=======
+# Book-Manager-System-Front-end
+图书管理系统前端
