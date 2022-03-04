@@ -1,5 +1,5 @@
 <template>
-  <div id="logo">
+  <div id="logo" draggable>
     <ISVG
         class="icon"
         :svg="svg"
@@ -46,6 +46,5 @@ span {
   height: 50px;
   vertical-align: center;
   overflow: hidden;
-  fill: rgb(255, 255, 255);
 }
 </style>

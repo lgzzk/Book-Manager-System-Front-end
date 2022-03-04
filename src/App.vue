@@ -1,22 +1,15 @@
 <template>
   <div id="app">
-    <Header/>
-    <Navigation/>
-    <Content/>
+    <RouterView/>
   </div>
 </template>
 
 <script>
 
-import Header from "@/components/Header";
-import Navigation from "@/components/Navigation";
-import Content from "@/components/Content";
 export default {
   name: 'App',
   components: {
-    Content,
-    Navigation,
-    Header
+
   }
 }
 </script>

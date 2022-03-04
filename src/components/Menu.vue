@@ -59,6 +59,6 @@ span{
 }
 
 span:hover{
-  background-color: #e4ecf3;
+  background-color: #cbd7e0;
 }
 </style>
