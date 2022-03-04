@@ -25,6 +25,6 @@ export default {
   #app{
     width: 100vh;
     height: 100vh;
-    overflow: hidden;
+    /*overflow: hidden;*/
   }
 </style>

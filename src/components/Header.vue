@@ -1,29 +1,29 @@
 <template>
   <div id="header">
-    <span>图书管理系统</span>
+    <Logo/>
   </div>
 </template>
 
 <script>
+import Logo from "@/components/Logo";
 export default {
-  name: "Header"
+  name: "Header",
+  components: {Logo}
 }
 </script>
 
 <style scoped>
   #header{
     width: 100%;
-    height: 100px;
-    z-index: 10;
+    height: 70px;
+    z-index: 20;
     color: #999;
     display: flex;
-    justify-content: center;
+    justify-content: left;
     align-items: center;
     position: absolute;
     background-color: #fefefe;
   }
 
-  span{
-    font-size: 50px;
-  }
+
 </style>
