@@ -15,9 +15,4 @@ export default {
 </script>
 
 <style>
-  #app{
-    width: 100vh;
-    height: 100vh;
-    /*overflow: hidden;*/
-  }
 </style>

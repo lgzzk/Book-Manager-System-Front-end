@@ -1,35 +1,57 @@
 <template>
   <div id="navigation">
+    <MenuItem :menu="home"/>
     <Menu v-for="m in menus" :menu="m" :key="m.title"/>
   </div>
 </template>
 
 <script>
-import Menu from "@/components/Menu";
+import Menu from "@/components/MenuFold";
+import MenuItem from "@/components/MenuItem";
 
 export default {
   name: "Navigation",
-  components: {Menu},
+  components: {MenuItem, Menu},
   data() {
     return {
-      menus: [
-        {
-          title: '首页',
+      home: {
+        title: '首页',
+        href: '/index/home',
+        svg: {
+          xlink: '#icon-a-3-shouye'
         },
+      },
+      menus: [
         {
           title: '系统设置',
           menus: [
             {
-              title: '图书馆信息'
+              title: '图书馆信息',
+              href: '/index/home',
+              svg: {
+                xlink: '#icon-shujia'
+              }
             },
             {
-              title: '参数设置'
+              title: '参数设置',
+              href: '/index/home',
+              svg: {
+                xlink: '#icon-shujia'
+              }
             },
             {
-              title: '书架设置'
+              title: '书架设置',
+              href: '/index/home',
+              svg: {
+                xlink: '#icon-shujia'
+              }
             },
             {
-              title: '管理员设置'
+              title: '管理员设置',
+              href: '/index/home',
+              svg: {
+                xlink: '#icon-shujia'
+              }
             }
           ]
         },
@@ -37,10 +59,18 @@ export default {
           title: '读者管理',
           menus: [
             {
-              title: '读者类型管理'
+              title: '读者类型管理',
+              href: '/index/home',
+              svg: {
+                xlink: '#icon-shujia'
+              }
             },
             {
-              title: '读者档案管理'
+              title: '读者档案管理',
+              href: '/index/home',
+              svg: {
+                xlink: '#icon-shujia'
+              }
             },
           ]
         },
@@ -48,16 +78,32 @@ export default {
           title: '图书借还',
           menus: [
             {
-              title: '图书借阅'
+              title: '图书借阅',
+              href: '/index/home',
+              svg: {
+                xlink: '#icon-shujia'
+              }
             },
             {
-              title: '图书续借'
+              title: '图书续借',
+              href: '/index/home',
+              svg: {
+                xlink: '#icon-shujia'
+              }
             },
             {
-              title: '图书归还'
+              title: '图书归还',
+              href: '/index/home',
+              svg: {
+                xlink: '#icon-shujia'
+              }
             },
             {
-              title: '图书借阅查询'
+              title: '图书借阅查询',
+              href: '/index/home',
+              svg: {
+                xlink: '#icon-shujia'
+              }
             }
           ]
         },
@@ -74,7 +120,6 @@ export default {
   left: 0px;
   z-index: 10;
   display: flex;
-  overflow: auto;
   padding-top: 200px;
   flex-direction: column;
   justify-content: start;
