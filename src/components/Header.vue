@@ -21,7 +21,6 @@ export default {
     display: flex;
     justify-content: left;
     align-items: center;
-    position: absolute;
     background-color: #fefefe;
   }
 

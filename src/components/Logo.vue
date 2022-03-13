@@ -4,7 +4,7 @@
         class="icon"
         :svg="svg"
     />
-    <span>BOOKMANAGER</span>
+    <span>BOOKMANAGE</span>
   </div>
 </template>
 
@@ -35,16 +35,17 @@ export default {
 }
 
 span {
-  font-size: 40px;
+  font-size: 30px;
   margin-left: 5px;
   font-weight: 900;
   font-family: "Segoe UI";
 }
 
 .icon {
-  width: 50px;
-  height: 50px;
+  width: 35px;
+  height: 35px;
   vertical-align: center;
   overflow: hidden;
+  fill: #5AC2EE;
 }
 </style>

@@ -4,7 +4,7 @@
         class="icon"
         :svg="svg"
     />
-    <span>BOOKMANAGER</span>
+    <span>BOOKMANAGE</span>
     <div class="form" @keyup.enter="login">
       <input type="text" placeholder="用户" v-model="name"/>
       <input type="password" placeholder="密码" v-model="password"/>
@@ -80,6 +80,7 @@ export default {
   height: 150px;
   vertical-align: center;
   overflow: hidden;
+  fill: #5AC2EE;
 }
 
 .form {

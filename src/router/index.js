@@ -3,6 +3,8 @@ import Login from "@/pages/Login";
 import Index from "@/pages/Index";
 import axios from "axios";
 import Home from "@/pages/Home";
+import LibrarySet from "@/pages/LibrarySet";
+import ParamSet from "@/pages/ParamSet";
 
 export const router = new VueRouter({
     base: '/',
@@ -17,8 +19,16 @@ export const router = new VueRouter({
             component: Index,
             children: [
                 {
-                    path: 'home',
+                    path: '',
                     component: Home
+                },
+                {
+                    path: 'library-set',
+                    component: LibrarySet
+                },
+                {
+                    path: 'param-set',
+                    component: ParamSet
                 }
             ]
         }

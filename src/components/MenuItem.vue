@@ -1,26 +1,34 @@
 <template>
   <RouterLink
+      id="menu-item"
+      class="menu-item"
       :to="menu.href"
       exact-active-class="active"
+
   >
-    <div id="menu-item">
-      <div :style="{marginLeft}">
-        <ISVG
-            class="icon"
-            :svg="menu.svg"
-        />
-        <span>{{ menu.title }}</span>
-      </div>
+    <div :style="{marginLeft}">
+      <ISVG
+          class="icon"
+          :svg="menu.svg"
+      />
+      <span :style="{display}">{{ menu.title }}</span>
     </div>
   </RouterLink>
 </template>
 
 <script>
 import ISVG from "@/components/ISVG";
+import {mapState} from "vuex";
 
 export default {
   name: "MenuItem",
   components: {ISVG},
+  computed: {
+    display() {
+      return this.isOpenNavigation ? '' : 'none';
+    },
+    ...mapState(['isOpenNavigation'])
+  },
   props: {
     menu: Object,
     marginLeft: String
@@ -29,39 +37,47 @@ export default {
 </script>
 
 <style scoped>
+.menu-item{
+  fill: #868E8E;
+  color: #868E8E;
+  border-left: 4px #F1F1F1 solid;
+  background-color: #F1F1F1;
+}
+
 #menu-item,
-#menu-item div{
+#menu-item div {
   height: 64px;
   display: flex;
-  padding-left: 15px;
+  padding-left: 8px;
   justify-content: space-between;
   align-items: center;
 }
 
-#menu-item:hover{
-  background-color: #cbd7e0;
+#menu-item:hover {
+  border-left: 4px #5AC2EE solid;
+  background-color: #E1E1E1;
 }
 
-.active{
-  background-color: #cbd7e0;
+.active {
+  fill: #5AC2EE;
+  color: #5AC2EE;
+  border-left: 4px #5AC2EE solid;
 }
 
 span {
   text-align: left;
   display: inline-block;
-  color: #868E8E;
-  font-size: 18px;
+  font-size: 17px;
   user-select: none;
 }
 
 .icon {
-  width: 25px;
-  height: 25px;
+  width: 23px;
+  height: 23px;
+  flex-shrink: 0;
   vertical-align: center;
   overflow: hidden;
-  fill: #868E8E;
   margin-right: 20px;
-  transition: .3s;
 }
 
 </style>
