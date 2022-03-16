@@ -2,16 +2,22 @@
   <div
       id="navigation"
       :style="{width}"
+      @mouseenter="hover"
+      @mouseleave="hover"
   >
     <MenuItem :menu="home"/>
-    <Menu v-for="m in menus" :menu="m" :key="m.title"/>
-    <div class="navigation-footer" @click="setNavigation">
-      <div class="navigation-footer-div">
-        <ISVG
-            class="icon"
-            :svg="svg"
-        />
-      </div>
+    <Menu
+        v-for="(m, i) in menus"
+        :menu="m"
+        :key="m.title"
+        ref="menus"
+        :index="i"
+    />
+    <div
+        @mouseenter.stop="hover"
+        @mouseleave.stop="hover"
+    >
+      <NavigationFooter/>
     </div>
   </div>
 </template>
@@ -20,25 +26,50 @@
 import Menu from "@/components/MenuFold";
 import MenuItem from "@/components/MenuItem";
 import {mapMutations, mapState} from "vuex";
-import ISVG from "@/components/ISVG";
+import NavigationFooter from "@/pages/NavigationFooter";
 
 export default {
   name: "Navigation",
-  components: {ISVG, MenuItem, Menu},
+  components: {NavigationFooter, MenuItem, Menu},
   computed: {
-    width(){
+    width() {
       return this.isOpenNavigation ? '230px' : '64px'
     },
     ...mapState(['isOpenNavigation'])
   },
+  mounted() {
+    this.$bus.$on('setMenus', (menuIndex) => {
+      this.menuIndex = menuIndex
+      this.$refs.menus.forEach((value, index) => {
+        if (index != menuIndex) {
+          value.isFold = true
+        }
+      })
+    })
+    this.$bus.$on('openMenu', (isFold) => {
+      this.isFold = isFold;
+      this.openMenu()
+    })
+  },
   methods: {
+    openMenu() {
+      this.setNavigation()
+      let menu = this.$refs.menus[this.menuIndex]
+      if (menu) {
+        menu.isFold = !this.isOpenNavigation
+      }
+    },
+    hover() {
+      if (this.isFold) {
+        this.openMenu()
+      }
+    },
     ...mapMutations(['setNavigation'])
   },
   data() {
     return {
-      svg: {
-        xlink: '#icon-a-115-lanmuguanli'
-      },
+      isFold: null,
+      menuIndex: null,
       home: {
         title: '首页',
         href: '/index',
@@ -144,7 +175,7 @@ export default {
   overflow-y: auto;
   overflow-x: hidden;
   transition: width .2s;
-  left: 0px;
+  left: 0;
   z-index: 20;
   padding-top: 100px;
   position: relative;
@@ -152,38 +183,8 @@ export default {
   background-color: #fefefe;
 }
 
-.navigation-footer{
-  fill: #868E8E;
-  left: 0;
-  bottom: 64px;
-  height: 64px;
-  width: 100%;
-  position: absolute;
-  background-color: #F1F1F1;
-}
-
-.menu-item{
+.menu-item {
   background-color: #FFFFFF;
 }
 
-.icon {
-  width: 23px;
-  height: 23px;
-  vertical-align: center;
-  overflow: hidden;
-}
-
-.navigation-footer-div{
-  height: 100%;
-  cursor: pointer;
-  display: flex;
-  flex-shrink: 0;
-  align-items: center;
-  justify-content: center;
-}
-
-.navigation-footer-div:hover{
-  fill: #5AC2EE;
-  background-color: #E1E1E1;
-}
 </style>

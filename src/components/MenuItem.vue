@@ -4,7 +4,6 @@
       class="menu-item"
       :to="menu.href"
       exact-active-class="active"
-
   >
     <div :style="{marginLeft}">
       <ISVG
@@ -69,6 +68,7 @@ span {
   display: inline-block;
   font-size: 17px;
   user-select: none;
+  white-space: nowrap;
 }
 
 .icon {

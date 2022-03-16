@@ -8,18 +8,21 @@
         class="head-menu"
         @click="setMenu"
     >
-      <div class="head-menu-div">
-        <ISVG
-            class="icon"
-            :svg="svg1"
-        />
-        <span :style="{display}">{{ menu.title }}</span>
-      </div>
       <ISVG
           class="icon"
-          :svg="svg"
-          :style="{transform, display}"
+          :svg="svg1"
       />
+      <div
+          class="head-menu-div"
+          :style="{display}"
+      >
+        <span>{{ menu.title }}</span>
+        <ISVG
+            class="icon"
+            :svg="svg"
+            :style="{transform}"
+        />
+      </div>
     </div>
     <MenuItem
         v-for="m in menu.menus"
@@ -41,61 +44,66 @@ export default {
   props: {menu: Object},
   computed: {
     display() {
-      return this.isOpenNavigation ? 'inline-block' : 'none'
+      return this.isOpenNavigation ? 'flex' : 'none'
+    },
+    height() {
+      return this.isFold ? '64px' : this.scrollHeight
+    },
+    transform() {
+      return this.isFold ? 'rotate(0deg)' : 'rotate(180deg)'
     },
     ...mapState(['isOpenNavigation'])
   },
   data() {
     return {
-      flag: true,
-      height: '64px',
+      isFold: true,
+      menuIndex: null,
+      scrollHeight: '',
       svg: {
         xlink: '#icon-jiantou'
       },
       svg1: {
         xlink: '#icon-a-3-shouye'
       },
-      transform: 'rotate(0deg)',
     }
+  },
+  mounted() {
+    this.scrollHeight = this.$refs.menu.scrollHeight + 'px'
   },
   methods: {
     setMenu() {
-      this.flag = !this.flag
-      if (this.flag) {
-        this.height = '64px'
-        this.transform = 'rotate(0deg)'
+      let index = this.$refs.menu.getAttribute('index');
+      this.isFold = !this.isFold
+      if (this.isFold) {
+        this.$bus.$emit('setMenus', -1)
       } else {
-        this.transform = 'rotate(180deg)'
-        this.height = this.$refs.menu.scrollHeight + 'px'
+        this.$bus.$emit('setMenus', index)
       }
-    },
+    }
   }
 }
 </script>
 
 <style scoped>
 #menu {
-  transition: height .3s;
+  transition: height .2s;
   overflow: hidden;
   cursor: pointer;
 }
 
-.head-menu-div{
-  border-left: 4px rgba(168, 58, 58, 0) solid;
-}
-
-.head-menu,
-.head-menu-div {
+.head-menu {
   height: 64px;
   display: flex;
-  flex-shrink: 0;
-  padding-left: 8px;
-  justify-content: space-between;
+  padding-left: 20px;
   align-items: center;
 }
 
-.head-menu .icon {
-  margin-right: 20px;
+.head-menu-div {
+  width: 70%;
+  display: flex;
+  margin-left: 20px;
+  align-items: center;
+  justify-content: space-between;
 }
 
 span {
@@ -103,6 +111,7 @@ span {
   color: #868E8E;
   font-size: 17px;
   user-select: none;
+  white-space: nowrap;
 }
 
 .head-menu:hover {
@@ -112,6 +121,7 @@ span {
 .icon {
   width: 23px;
   height: 23px;
+  flex-shrink: 0;
   vertical-align: center;
   overflow: hidden;
   fill: #868E8E;
