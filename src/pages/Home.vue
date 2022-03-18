@@ -13,13 +13,40 @@
         <td>定价(元)</td>
         <td>借阅次数</td>
       </tr>
+      <tr v-for="(b, i) in borrowOrder"
+          :key="b.barcode"
+      >
+        <td>{{i+1}}</td>
+        <td>{{b.barcode}}</td>
+        <td>{{b.bookName}}</td>
+        <td>{{b.typeName}}</td>
+        <td>{{b.caseName}}</td>
+        <td>{{b.pubName}}</td>
+        <td>{{b.author}}</td>
+        <td>{{b.price}}</td>
+        <td>{{b.count}}</td>
+      </tr>
     </table>
   </div>
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
-  name: "Home"
+  name: "Home",
+  created() {
+    axios.get('http://localhost:8081/BookManagerSystem/borrowOrder')
+        .then(({data}) => {
+          console.log(data)
+          this.borrowOrder = data.result
+        })
+  },
+  data() {
+    return {
+      borrowOrder: null
+    }
+  }
 }
 </script>
 
@@ -47,7 +74,7 @@ td {
   flex-direction: column;
   border-radius: 4px;
   background-color: rgba(254, 254, 254, 1);
-  box-shadow: -1px -1px 5px 0 rgba(0,0,0,.1);
+  box-shadow: -1px -1px 5px 0 rgba(0, 0, 0, .1);
 }
 
 #book h1 {

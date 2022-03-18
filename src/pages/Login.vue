@@ -97,10 +97,11 @@ input {
   height: 35px;
   padding: 15px;
   color: #868E8E;
-  border: 2px #dcdcdc solid;
   outline: none;
   font-size: 20px;
+  transition: .5s;
   border-radius: 5px;
+  border: 2px #dcdcdc solid;
   background-image: linear-gradient(to top, #dfe9f3 0%, white 100%);
 }
 

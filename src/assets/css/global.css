@@ -18,6 +18,10 @@ body, #app{
     overflow: hidden;
 }
 
+span{
+    display: inline-block;
+}
+
 .center-translate{
     top: 50%;
     left: 50%;
