@@ -3,15 +3,17 @@
       id="content"
       :style="{paddingLeft}"
   >
-    <RouterView/>
+    <ContentPage/>
   </div>
 </template>
 
 <script>
 import {mapState} from "vuex";
+import ContentPage from "@/components/ContentPage";
 
 export default {
   name: "Content",
+  components: {ContentPage},
   computed: {
     paddingLeft(){
       return this.isOpenNavigation ? '250px' : '85px'
@@ -25,7 +27,6 @@ export default {
   #content{
     height: 100%;
     width: 100%;
-    overflow: auto;
     padding: 20px 20px 20px;
     transition: .2s;
     position: absolute;

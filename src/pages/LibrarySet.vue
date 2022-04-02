@@ -1,52 +1,88 @@
 <template>
   <div id="library-set">
-    <div class="library-set-header">
-      图书馆信息
-    </div>
+    <ContentHeader :text="text"/>
     <div class="library-set-content">
-      <form autocomplete="off">
+      <form @submit="save">
         <div class="form-item">
           <span class="form-span">图书馆名称</span>
-          <input type="text" name="libraryname" required/>
+          <input type="text" required v-model="library.libraryName"/>
         </div>
         <div class="form-item">
           <span class="form-span">馆长</span>
-          <input type="text" name="curator" required/>
+          <input type="text" required v-model="library.curator"/>
         </div>
         <div class="form-item">
           <span class="form-span">联系电话</span>
-          <input type="tel" name="tel" required/>
+          <input type="tel" required v-model="library.tel"/>
         </div>
         <div class="form-item">
           <span class="form-span">联系地址</span>
-          <input type="text" name="address"/>
+          <input type="text" v-model="library.address"/>
         </div>
         <div class="form-item">
           <span class="form-span">联系邮箱</span>
-          <input type="email" name="email" required/>
+          <input type="email" required v-model="library.email"/>
         </div>
         <div class="form-item">
           <span class="form-span">图书馆网址</span>
-          <input type="url" name="url"/>
+          <input type="url" required v-model="library.url"/>
         </div>
         <div class="form-item">
           <span class="form-span">键馆时间</span>
-          <input type="date" name="createDate"/>
+          <input type="date" required v-model="library.createDate"/>
         </div>
         <div class="form-item">
           <span class="form-span">图书馆介绍</span>
-          <textarea cols="30" rows="10" name="introduce"></textarea>
+          <textarea cols="30" rows="9" required v-model="library.introduce"></textarea>
         </div>
-        <button id="save">保存</button>
-        <button id="cancel">取消</button>
+        <button>保存</button>
       </form>
     </div>
   </div>
 </template>
 
 <script>
+import axios from "axios";
+import ContentHeader from "@/components/ContentHeader";
+
 export default {
-  name: "LibrarySet"
+  name: "LibrarySet",
+  components: {ContentHeader},
+  created() {
+    axios.get(`http://localhost:8081/BookManagerSystem/library/1`)
+        .then(({data}) => {
+          this.library = data.result
+        })
+  },
+  data() {
+    return {
+      text: '图书馆信息',
+      library: {
+        id: null,
+        libraryName: null,
+        curator: null,
+        tel: null,
+        address: null,
+        email: null,
+        url: null,
+        createDate: null,
+        introduce: null
+      }
+    }
+  },
+  methods: {
+    save(e) {
+      let library = this.library
+      axios.put('http://localhost:8081/BookManagerSystem/library', {
+        ...library
+      }).then(({data}) => {
+        if (data.code === 200) {
+          alert("保存成功！")
+        }
+      })
+      e.preventDefault()
+    }
+  }
 }
 </script>
 
@@ -54,20 +90,6 @@ export default {
 #library-set {
   width: 100%;
   height: 100%;
-  padding: 20px;
-  border-radius: 4px;
-  background-color: rgba(254, 254, 254, 1);
-  box-shadow: -1px -1px 5px 0 rgba(0, 0, 0, .1);
-  /*background-image: url("../assets/comment.png");*/
-}
-
-.library-set-header {
-  color: #838FA1;
-  /*color: #5AC2EE;*/
-  font-size: 18px;
-  padding: 10px;
-  border-bottom: 2px #eef1f5 solid;
-  /*border-bottom: 2px #5AC2EE solid;*/
 }
 
 .library-set-content {
@@ -100,11 +122,11 @@ form {
   /*background-color: #5AC2EE;*/
 }
 
-input{
+input {
   width: 70%;
   height: 35px;
   line-height: 35px;
-  color: #646363;
+  color: #606266;
   font-size: 18px;
   outline: none;
   border: none;
@@ -112,25 +134,45 @@ input{
   border-bottom: 1px #c2cad8 solid;
 }
 
-input:focus{
+input:focus {
   border-bottom: 1px #5AC2EE solid;
 }
 
-textarea{
+textarea {
   width: 100%;
   resize: vertical;
   outline: none;
   font-size: 18px;
+  margin-top: 15px;
   font-weight: 900;
+  min-height: 100px;
   padding: 5px 10px;
+  border-radius: 4px;
   border: 1px #c2cad8 solid;
   background-color: transparent;
   background-size: cover;
   background-position: bottom;
-  background-image: url("../assets/comment.png") ;
+  background-image: url("../assets/comment.png");
 }
 
-textarea:focus{
+textarea:focus {
   border: 1px #5AC2EE solid;
+}
+
+button {
+  cursor: pointer;
+  line-height: 1;
+  width: 100%;
+  color: #fff;
+  transition: .1s;
+  padding: 12px 20px;
+  font-size: 14px;
+  border-radius: 4px;
+  border: 1px solid #5AC2EE;
+  background-color: #5AC2EE;
+}
+
+button:hover {
+  background-color: #7acaea;
 }
 </style>

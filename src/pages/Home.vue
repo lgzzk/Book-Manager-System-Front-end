@@ -70,11 +70,7 @@ td {
   padding: 10px;
   display: flex;
   flex-shrink: 0;
-  overflow: hidden;
   flex-direction: column;
-  border-radius: 4px;
-  background-color: rgba(254, 254, 254, 1);
-  box-shadow: -1px -1px 5px 0 rgba(0, 0, 0, .1);
 }
 
 #book h1 {

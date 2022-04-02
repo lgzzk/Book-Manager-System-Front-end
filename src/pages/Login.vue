@@ -99,7 +99,7 @@ input {
   color: #868E8E;
   outline: none;
   font-size: 20px;
-  transition: .5s;
+  transition: .4s;
   border-radius: 5px;
   border: 2px #dcdcdc solid;
   background-image: linear-gradient(to top, #dfe9f3 0%, white 100%);
@@ -128,6 +128,6 @@ span {
   font-size: 40px;
   margin-left: 5px;
   font-weight: 900;
-  font-family: "Segoe UI";
+  font-family: "Segoe UI",serif;
 }
 </style>

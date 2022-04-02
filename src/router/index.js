@@ -37,26 +37,30 @@ export const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
     let token = localStorage.getItem('access-admin')
-    if (!token && to.path !== '/') {
-        return next('/')
-    } else {
-        axios.get('http://192.168.18.7:8081/BookManagerSystem/managers/checkToken', {
-            params:{
-                token
+    axios.get('http://192.168.18.7:8081/BookManagerSystem/managers/checkToken', {
+        params: {
+            token
+        }
+    }).then(({data}) => {
+        console.log(data)
+        if (data.result) {
+            /*强制跳转登录页*/
+            if (to.path === '/') {
+                next('/index')
             }
-        }).then(({data}) => {
-            if (data.result) {
-                /*强制跳转登录页*/
-                // if (to.path === '/'){
-                //     return next('/index')
-                // }
+            next()
+        } else {
+            if (to.path === '/'){
                 next()
-            }else {
-                return next('/')
+                return
             }
-        }, reason => {
-            console.log(reason)
-        })
-    }
-    next()
+            next('/')
+        }
+    }, () => {
+        if (to.path === '/'){
+            next()
+            return
+        }
+        next('/')
+    })
 })
