@@ -1,28 +1,6 @@
-<<<<<<< HEAD
-# book-manager-system-front-end
-
-## Project setup
-```
-npm install
-```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
-=======
 # Book-Manager-System-Front-end
 图书管理系统前端
+
+![image](https://github.com/lgzzk/Book-Manager-System-Front-end/assets/46087700/17184482-5fd3-4189-ab54-465e363124c4)
+
+
